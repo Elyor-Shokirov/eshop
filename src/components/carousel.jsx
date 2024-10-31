@@ -70,22 +70,10 @@ function CarouselPage() {
         sliderClass=""
         slidesToSlide={1}
         swipeable>
-        <img
-          src="../../public/img/Aktsiya4.jpg"
-          className="md:h-[681px] object-fill"
-        />
-        <img
-          src="../../public/img/Aktsiya2.jpg"
-          className="md:h-[681px] object-fill"
-        />
-        <img
-          src="../../public/img/Aktsiya3.jpg"
-          className="md:h-[681px] object-fill"
-        />
-        <img
-          src="../../public/img/Aktsiya1.jpg"
-          className="md:h-[681px] object-fill"
-        />
+        <img src="/img/Aktsiya4.jpg" className="md:h-[681px] object-fill" />
+        <img src="/img/Aktsiya2.jpg" className="md:h-[681px] object-fill" />
+        <img src="/img/Aktsiya3.jpg" className="md:h-[681px] object-fill" />
+        <img src="/img/Aktsiya1.jpg" className="md:h-[681px] object-fill" />
       </Carousel>
     </div>
   );

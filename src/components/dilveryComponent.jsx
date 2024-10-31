@@ -10,7 +10,7 @@ function DilveryComponent() {
               <div className="card-body">
                 <div className="flex flex-col justify-center items-center">
                   <img
-                    src="../../public/img/truck 1.png"
+                    src="/img/truck 1.png"
                     alt="ICON_DIL"
                     className="w-[13%]"
                   />
@@ -31,7 +31,7 @@ function DilveryComponent() {
               <div className="card-body">
                 <div className="flex flex-col justify-center items-center">
                   <img
-                    src="../../public/img/app_1.png"
+                    src="/img/app_1.png"
                     alt="ICON_DIL"
                     className="w-[13%]"
                   />
@@ -52,7 +52,7 @@ function DilveryComponent() {
               <div className="card-body">
                 <div className="flex flex-col justify-center items-center">
                   <img
-                    src="../../public/img/payment_1.png"
+                    src="/img/payment_1.png"
                     alt="ICON_DIL"
                     className="w-[13%]"
                   />
