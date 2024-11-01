@@ -1,92 +1,91 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { CiHeart } from "react-icons/ci";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { MdAddShoppingCart, MdOutlineRemoveRedEye } from "react-icons/md";
-import { useDispatch, useSelector, useStore } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { changeAnyValue } from "../feauturs/productSlice";
-import { useFetch } from "../hooks/useFetch";
+import { likedProducts, unLikeProducts } from "../feauturs/productSlice";
 import "./product.css";
 
-function Products() {
+function Products({ product, added }) {
+  const { id, images, title, price } = product;
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.product);
-  // const count = useSelector((state) => state.counter.value);
 
-  console.log("dataIN", products);
+  const { products, likedArray } = useSelector((state) => state.product);
 
-  const { data, isPending, error } = useFetch(
-    `https://dummyjson.com/products/?limit=50`
-  );
+  const addLikedProduct = (product) => {
+    const isLiked = likedArray.find((pro) => pro.id === product.id);
 
-  useEffect(() => {
-    if (data?.products) {
-      dispatch(changeAnyValue(data.products));
+    if (isLiked) {
+      dispatch(unLikeProducts(product.id));
+    } else {
+      dispatch(likedProducts(product));
     }
-  }, [data]);
+  };
 
   return (
-    <div>
-      <div className="m-auto max-w-[1440px] px-8 md:bg-white bg-gray-100 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-          {isPending && <h1>Loading...</h1>}
-          {data?.products &&
-            data.products.map((product) => (
-              <div key={product.id} className="col-span-12 md:col-span-3 ">
-                <div className="card bg-base-100 w-full shadow-xl  product-grid p-2 min-h-[560px]">
-                  <figure className="product-image ">
-                    <img
-                      className=" pic-1 group list-group-image img-fluid"
-                      src={product.images}
-                      alt="iphone"
-                    />
-                    <img src={product.images} alt="iphone" className="pic-2" />
-                    <ul className="social">
-                      <li>
-                        <Link
-                          to={`/product/${product.id}`}
-                          data-tip="quick view">
-                          <MdOutlineRemoveRedEye />
-                        </Link>
-                      </li>
-                      <li>
-                        <Link data-tip="wishlist">
-                          <CiHeart />
-                        </Link>
-                      </li>
-                      <li>
-                        <Link data-tip="add to cart">
-                          <MdAddShoppingCart />
-                        </Link>
-                      </li>
-                      <li>
-                        <Link data-tip="compare">
-                          <i className="fas fa-random"></i>
-                        </Link>
-                      </li>
-                    </ul>
-                  </figure>
-                  <div className="card-body">
-                    <h2 className="card-title font-monserat font-bold">
-                      {product.title}
-                    </h2>
-                    {/* <p className="font-monserat text-sm">
-                      {product.description}
-                    </p> */}
-                    <div className="flex">
-                      <span className="font-monserat font-semibold">
-                        {product.price}
-                      </span>{" "}
-                      <span>usd</span>
-                    </div>
-                    <div className="card-actions justify-center mt-3 ">
-                      <button className="btn bg-[#f1970a] text-white w-[200px] font-monserat text-base">
-                        Sotib olish
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+    <div className="col-span-12 md:col-span-3">
+      <div className="card bg-base-100 w-full shadow-xl product-grid p-2 min-h-[30rem]">
+        <figure className="product-image">
+          <img
+            className="pic-1 group list-group-image w-full h-auto"
+            src={images[0]}
+            alt={title}
+          />
+          <img src={images[0]} alt={title} className="pic-2" />
+          <ul className="social">
+            <li>
+              <Link to={`/product/${id}`} data-tip="Quick view">
+                <MdOutlineRemoveRedEye />
+              </Link>
+            </li>
+            <li>
+              <Link>
+                {!added && (
+                  <span onClick={() => addLikedProduct(product)} className="">
+                    <FaRegHeart className=" md:text-white text-lg hover:text-[#f1970a] " />
+                  </span>
+                )}
+                {added && (
+                  <span
+                    onClick={() => addLikedProduct(product)}
+                    className="  md:custom_hover_image rounded border-[1px] border-red-600 bg-red-600 p-1 md:bottom-auto md:bg-red-600">
+                    <FaHeart className="text-sm text-white " />
+                  </span>
+                )}
+              </Link>
+
+              {/* <button
+                onClick={() => addLikedProduct(product)}
+                data-tip="Wishlist">
+                <CiHeart />
+              </button> */}
+            </li>
+            <li>
+              <Link data-tip="Add to cart">
+                <MdAddShoppingCart />
+              </Link>
+            </li>
+            <li>
+              <Link data-tip="Compare">
+                <i className="fas fa-random"></i>
+              </Link>
+            </li>
+          </ul>
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title font-monserat font-bold">{title}</h2>
+        </div>
+        <div className="card-footer p-[2rem]">
+          <div className="flex justify-between items-center">
+            <div>
+              <span className="font-monserat font-semibold">{price}</span>{" "}
+              <span>USD</span>
+            </div>
+            <button className="btn rounded-full btn-ghost">
+              <MdAddShoppingCart className="text-xl text-[#f1970a]" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
