@@ -23,8 +23,9 @@ function CarouselPage() {
   return (
     <div>
       <Carousel
+        autoPlay={true}
         arrows
-        autoPlaySpeed={1000}
+        autoPlaySpeed={2000}
         centerMode={false}
         className=""
         // containerClass="container"
@@ -70,10 +71,22 @@ function CarouselPage() {
         sliderClass=""
         slidesToSlide={1}
         swipeable>
-        <img src="/img/Aktsiya4.jpg" className="md:h-[681px] object-fill" />
-        <img src="/img/Aktsiya2.jpg" className="md:h-[681px] object-fill" />
-        <img src="/img/Aktsiya3.jpg" className="md:h-[681px] object-fill" />
-        <img src="/img/Aktsiya1.jpg" className="md:h-[681px] object-fill" />
+        <img
+          src="/img/Aktsiya4.jpg"
+          className="md:h-[681px] object-fill w-[inherit]"
+        />
+        <img
+          src="/img/Aktsiya2.jpg"
+          className="md:h-[681px] object-fill w-[inherit]"
+        />
+        <img
+          src="/img/Aktsiya3.jpg"
+          className="md:h-[681px] object-fill w-[inherit]"
+        />
+        <img
+          src="/img/Aktsiya1.jpg"
+          className="md:h-[681px] object-fill w-[inherit]"
+        />
       </Carousel>
     </div>
   );
