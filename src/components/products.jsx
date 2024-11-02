@@ -4,14 +4,20 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { MdAddShoppingCart, MdOutlineRemoveRedEye } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { likedProducts, unLikeProducts } from "../feauturs/productSlice";
+import {
+  addProducts,
+  likedProducts,
+  unLikeProducts,
+} from "../feauturs/productSlice";
 import "./product.css";
 
 function Products({ product, added }) {
   const { id, images, title, price } = product;
   const dispatch = useDispatch();
 
-  const { products, likedArray } = useSelector((state) => state.product);
+  const { products, likedArray, shopCard } = useSelector(
+    (state) => state.product
+  );
 
   const addLikedProduct = (product) => {
     const isLiked = likedArray.find((pro) => pro.id === product.id);
@@ -20,6 +26,13 @@ function Products({ product, added }) {
       dispatch(unLikeProducts(product.id));
     } else {
       dispatch(likedProducts(product));
+    }
+  };
+
+  const handleAddProducts = (product) => {
+    const addShopCard = products.find((pro) => pro.id === product.id);
+    if (addShopCard) {
+      dispatch(addProducts(addShopCard));
     }
   };
 
@@ -54,15 +67,11 @@ function Products({ product, added }) {
                   </span>
                 )}
               </Link>
-
-              {/* <button
-                onClick={() => addLikedProduct(product)}
-                data-tip="Wishlist">
-                <CiHeart />
-              </button> */}
             </li>
             <li>
-              <Link data-tip="Add to cart">
+              <Link
+                data-tip="Add to cart"
+                onClick={() => handleAddProducts(product)}>
                 <MdAddShoppingCart />
               </Link>
             </li>
@@ -82,7 +91,9 @@ function Products({ product, added }) {
               <span className="font-monserat font-semibold">{price}</span>{" "}
               <span>USD</span>
             </div>
-            <button className="btn rounded-full btn-ghost">
+            <button
+              onClick={() => handleAddProducts(product)}
+              className="btn rounded-full btn-ghost">
               <MdAddShoppingCart className="text-xl text-[#f1970a]" />
             </button>
           </div>

@@ -6,11 +6,12 @@ import {
   FaRegUserCircle,
 } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { RiDeleteBinLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function Navbar() {
-  const { likedArray } = useSelector((state) => state.product);
+  const { likedArray, shopCard } = useSelector((state) => state.product);
 
   return (
     <div className="bg-[#523d7b]">
@@ -101,21 +102,51 @@ function Navbar() {
                       />
                     </svg>
                     <span className="badge badge-md indicator-item bg-[#f1970a] border-none">
-                      8
+                      {shopCard.length}
                     </span>
                   </div>
                 </div>
                 <div
                   tabIndex={0}
-                  className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow">
+                  className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-[500px] shadow">
                   <div className="card-body">
-                    <span className="text-lg font-bold">8 Items</span>
-                    <span className="text-info">Subtotal: $999</span>
+                    <span className="text-lg font-bold">
+                      {shopCard.length} mahsulot mavjud
+                    </span>
+                    <div className="overflow-x-auto">
+                      <table className="table table-md w-full">
+                        <tbody>
+                          {shopCard.map((shopcard) => (
+                            <tr key={shopcard.id} className="hover">
+                              {/* Avatar column */}
+                              <th className="w-12">
+                                <div className="avatar">
+                                  <div className="w-8 rounded">
+                                    <img
+                                      src={shopcard.images[0]}
+                                      alt="Product Avatar"
+                                    />
+                                  </div>
+                                </div>
+                              </th>
+
+                              <td className="w-1/2">{shopcard.title}</td>
+
+                              <td className="w-1/4">{shopcard.price}</td>
+
+                              <td className="w-12 text-center">
+                                <RiDeleteBinLine />
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                     <div className="card-actions">
                       <Link
                         to="/shopcard"
                         className="btn bg-[#f1970a] text-white btn-block">
-                        View cart
+                        Buyurtmani rasmiylashtirish
                       </Link>
                     </div>
                   </div>

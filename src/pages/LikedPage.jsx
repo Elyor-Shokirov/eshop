@@ -6,17 +6,17 @@ import ProductContainer from "../components/productContainer";
 
 function LikedPage() {
   const { likedArray } = useSelector((state) => state.product);
-  console.log(likedArray);
 
   if (likedArray.length == 0) {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-10 px-3 mt-10">
+        <img src="/img/empty-product.svg" alt="" />
         <h1 className="text-center font-monserat text-sm md:text-4xl">
-          You dont have any liked images :(
+          Sevimli mahsulotlar yo'q :(
         </h1>
         <Link to="/">
           <button className="btn bg-[#f1970a] btn-sm md:btn-md text-white font-monserat">
-            Go Home
+            Bosh sahifa
           </button>
         </Link>
       </div>

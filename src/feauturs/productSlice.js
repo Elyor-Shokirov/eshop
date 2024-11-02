@@ -31,7 +31,9 @@ export const productSlice = createSlice({
     totalAmmount: 0,
   },
   reducers: {
-    addProducts: (state, { payload }) => {},
+    addProducts: (state, { payload }) => {
+      state.shopCard = [...state.shopCard, payload];
+    },
     likedProducts: (state, { payload }) => {
       state.likedArray = [...state.likedArray, payload];
     },
