@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-hot-toast";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { MdAddShoppingCart, MdOutlineRemoveRedEye } from "react-icons/md";
@@ -24,15 +25,29 @@ function Products({ product, added }) {
 
     if (isLiked) {
       dispatch(unLikeProducts(product.id));
+      toast.error("Maxsulotingiz sevimlilar ro'yhatidan o'chirildi");
     } else {
       dispatch(likedProducts(product));
+      toast.success("Maxsulotingiz sevimlilar ro'yhatiga qo'shildi");
     }
   };
 
   const handleAddProducts = (product) => {
     const addShopCard = products.find((pro) => pro.id === product.id);
     if (addShopCard) {
-      dispatch(addProducts(addShopCard));
+      const addProductPromise = new Promise((resolve, reject) => {
+        try {
+          dispatch(addProducts(addShopCard));
+          resolve();
+        } catch (error) {
+          reject(error);
+        }
+      });
+      toast.promise(addProductPromise, {
+        loading: "Saving...",
+        success: <b>Mahsulotingiz muvofaqqiyatli qo'shildi</b>,
+        error: <b>Could not save.</b>,
+      });
     }
   };
 
