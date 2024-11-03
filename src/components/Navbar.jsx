@@ -7,11 +7,17 @@ import {
 } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { deleteProducts } from "../feauturs/productSlice";
 
 function Navbar() {
+  const dispatch = useDispatch();
   const { likedArray, shopCard } = useSelector((state) => state.product);
+
+  const deleteProduct = (shopcard) => {
+    dispatch(deleteProducts(shopcard.id));
+  };
 
   return (
     <div className="bg-[#523d7b]">
@@ -134,7 +140,9 @@ function Navbar() {
 
                               <td className="w-1/4">{shopcard.price}</td>
 
-                              <td className="w-12 text-center">
+                              <td
+                                className="w-12 text-center cursor-pointer"
+                                onClick={() => deleteProduct(shopcard)}>
                                 <RiDeleteBinLine />
                               </td>
                             </tr>

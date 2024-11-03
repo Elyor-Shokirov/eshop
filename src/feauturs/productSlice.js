@@ -42,7 +42,9 @@ export const productSlice = createSlice({
         (product) => product.id !== payload
       );
     },
-    deleteProducts: (state, { payload }) => {},
+    deleteProducts: (state, { payload }) => {
+      state.shopCard = state.shopCard.filter((delPro) => delPro.id !== payload);
+    },
     changeAnyValue: (state, { payload }) => {
       state.products = payload;
       localStorage.setItem("products", JSON.stringify(state.products));
@@ -50,7 +52,12 @@ export const productSlice = createSlice({
   },
 });
 
-export const { addProducts, changeAnyValue, likedProducts, unLikeProducts } =
-  productSlice.actions;
+export const {
+  addProducts,
+  changeAnyValue,
+  likedProducts,
+  unLikeProducts,
+  deleteProducts,
+} = productSlice.actions;
 
 export default productSlice.reducer;

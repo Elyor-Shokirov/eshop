@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ProtectedRouters } from "./components";
 import MainLayout from "./Layout/MainLayout";
-import { Home, InfoProducts, LikedPage, ShopCard } from "./pages";
+import { CategoryPage, Home, InfoProducts, LikedPage, ShopCard } from "./pages";
 
 function App() {
   const routers = createBrowserRouter([
@@ -28,6 +28,10 @@ function App() {
         {
           path: "/shopcard",
           element: <ShopCard />,
+        },
+        {
+          path: "/categoryproducts/:slug",
+          element: <CategoryPage />,
         },
       ],
     },

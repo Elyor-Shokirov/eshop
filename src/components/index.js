@@ -1,4 +1,5 @@
 export { default as CarouselPage } from "./carousel";
+export { default as CategoryCarousel } from "./categoryCarousel";
 export { default as Dilvery } from "./dilveryComponent";
 export { default as LogoSection } from "./logoSection";
 export { default as Menu } from "./Menu";

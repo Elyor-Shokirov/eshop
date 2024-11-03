@@ -1,9 +1,20 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { deleteProducts, likedProducts } from "../feauturs/productSlice";
 
 function ShopCardPage() {
   const { shopCard } = useSelector((state) => state.product);
+
+  const dispatch = useDispatch();
+
+  const deleteProduct = (shopcard) => {
+    dispatch(deleteProducts(shopcard.id));
+  };
+
+  const addLikedPrododucts = (shopcard) => {
+    dispatch(likedProducts(shopcard));
+  };
 
   const totalPrice = shopCard.reduce((sum, item) => sum + item.price, 0);
   const totalFixPrice = totalPrice.toFixed(2);
@@ -65,12 +76,16 @@ function ShopCardPage() {
                               <div className="text-sm opacity-50">
                                 {shopcard.brand}
                               </div>
-                              <Link className="border-r-2 pr-2">
+                              <Link
+                                className="border-r-2 pr-2"
+                                onClick={() => addLikedPrododucts(shopcard)}>
                                 <span className="text-[#2b71f8]">
                                   Sevimlilarga qo'shish
                                 </span>
                               </Link>
-                              <Link className="pl-2">
+                              <Link
+                                className="pl-2"
+                                onClick={() => deleteProduct(shopcard)}>
                                 <span className="text-[#2b71f8]">
                                   O'chirish
                                 </span>
