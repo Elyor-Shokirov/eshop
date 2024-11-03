@@ -4,6 +4,7 @@ import {
   CarouselPage,
   CategoryCarousel,
   Dilvery,
+  Loading,
   Products,
 } from "../components";
 import ProductContainer from "../components/productContainer";
@@ -32,7 +33,7 @@ function Home() {
         <CategoryCarousel />
       </div>
       <div className="mt-[50px] mb-[50px]">
-        {isPending && <h1>Loading...</h1>}
+        <div>{isPending && <Loading />}</div>
         <ProductContainer products={products} />
       </div>
     </div>

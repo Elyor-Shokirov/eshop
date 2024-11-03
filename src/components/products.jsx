@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
@@ -14,6 +14,8 @@ import "./product.css";
 
 function Products({ product, added }) {
   const { id, images, title, price } = product;
+  const [isLoaded, setIsLoaded] = useState(false); // New state for image loading
+
   const dispatch = useDispatch();
 
   const { products, likedArray, shopCard } = useSelector(

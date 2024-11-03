@@ -2,6 +2,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import { Link } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
+import Loading from "./loading";
 
 function CategoryCarousel() {
   const { data, isPending, error } = useFetch(
@@ -29,7 +30,7 @@ function CategoryCarousel() {
     },
   };
 
-  if (isPending) return <p>Loading...</p>;
+  if (isPending) return <Loading />;
   if (error) return <p>Error: {error}</p>;
   return (
     <div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Loading } from "../components";
 import ProductContainer from "../components/productContainer";
 import { changeAnyValue } from "../feauturs/productSlice";
 import { useFetch } from "../hooks/useFetch";
@@ -23,10 +24,10 @@ function CategoryPage() {
   }, [data]);
 
   return (
-    <div className="m-auto max-w-[1440px]">
-      <div>
+    <div className="m-auto max-w-[1440px] ">
+      <div className="pt-8">
         {isPending ? (
-          <p>Loading...</p>
+          <Loading />
         ) : error ? (
           <p>Error: {error.message}</p>
         ) : products && products ? (
