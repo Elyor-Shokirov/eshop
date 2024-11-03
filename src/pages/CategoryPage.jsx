@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ProductContainer from "../components/productContainer";
+import { changeAnyValue } from "../feauturs/productSlice";
 import { useFetch } from "../hooks/useFetch";
-
 function CategoryPage() {
   const { slug } = useParams();
+  const dispatch = useDispatch();
 
   const [categoryData, setCategoryData] = useState();
 
@@ -12,9 +14,11 @@ function CategoryPage() {
     `https://dummyjson.com/products/category/${slug}`
   );
 
+  const { products } = useSelector((state) => state.product);
+
   useEffect(() => {
-    if (data) {
-      setCategoryData(data);
+    if (data?.products) {
+      dispatch(changeAnyValue(data.products));
     }
   }, [data]);
 
@@ -25,8 +29,8 @@ function CategoryPage() {
           <p>Loading...</p>
         ) : error ? (
           <p>Error: {error.message}</p>
-        ) : categoryData && categoryData.products ? (
-          <ProductContainer products={categoryData.products} />
+        ) : products && products ? (
+          <ProductContainer products={products} />
         ) : (
           <p>No products found in this category.</p>
         )}
