@@ -67,7 +67,7 @@ function CategoryCarousel() {
                 <div className="flex flex-col justify-center items-center">
                   <div className="p-7  ">
                     <img
-                      src={`../../public/img/${item.slug}.jpg`}
+                      src={`/img/${item.slug}.jpg`}
                       alt=""
                       className="w-[200px] h-[200px] object-cover rounded-full border-2 border-[#523d7b] shadow-xl"
                     />
