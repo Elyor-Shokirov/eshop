@@ -28,7 +28,20 @@ function Products({ product, added }) {
       toast.error("Maxsulotingiz sevimlilar ro'yhatidan o'chirildi");
     } else {
       dispatch(likedProducts(product));
-      toast.success("Maxsulotingiz sevimlilar ro'yhatiga qo'shildi");
+      toast.success("Maxsulotingiz sevimlilar ro'yhatiga qo'shildi", {
+        style: {
+          border: "1px solid #4caf50",
+          padding: "16px",
+          background: "#4caf50",
+          color: "#fff",
+          fontFamily: "Montserrat",
+          fontWeight: 300,
+        },
+        iconTheme: {
+          primary: "#fff",
+          secondary: "#4caf50",
+        },
+      });
     }
   };
 
@@ -43,11 +56,28 @@ function Products({ product, added }) {
           reject(error);
         }
       });
-      toast.promise(addProductPromise, {
-        loading: "Saving...",
-        success: <b>Mahsulotingiz muvofaqqiyatli qo'shildi</b>,
-        error: <b>Could not save.</b>,
-      });
+      toast.promise(
+        addProductPromise,
+        {
+          loading: "Saving...",
+          success: <b>Mahsulotingiz muvofaqqiyatli qo'shildi</b>,
+          error: <b>Could not save.</b>,
+        },
+        {
+          style: {
+            border: "1px solid #4caf50",
+            padding: "16px",
+            background: "#4caf50",
+            color: "#fff",
+            fontFamily: "Montserrat",
+            fontWeight: 300,
+          },
+          iconTheme: {
+            primary: "#fff",
+            secondary: "#4caf50",
+          },
+        }
+      );
     }
   };
 
