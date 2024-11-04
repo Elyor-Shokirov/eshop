@@ -22,7 +22,7 @@ function Menu() {
                   <div className="flex justify-end items-start md:hidden">
                     <img
                       className="w-[50%] mr-3"
-                      src="../../public/img/logo-1.png"
+                      src="/img/logo-1.png"
                       alt=""
                     />
                   </div>
