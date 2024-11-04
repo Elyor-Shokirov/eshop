@@ -3,21 +3,31 @@ import { CiMenuBurger } from "react-icons/ci";
 
 function Menu() {
   return (
-    <div className="bg-[#5f4b84] mt-8">
+    <div className="bg-[#5f4b84] ">
       <div className="m-auto max-w-[1440px]">
         <div className="navbar p-0">
           <div className="">
             <a className=" btn-ghost text-xl">
               <div className="dropdown dropdown-hover">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn m-1 w-[250px] bg-[#7355A9] border-none rounded-none h-[50px] flex gap-3 items-center text-white font-monserat text-lg font-semibold">
-                  <span>
-                    <CiMenuBurger className="text-white font-semibold" />
-                  </span>
-                  Bo'limlar
+                <div className="flex justify-between md:block">
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn m-1 md:w-[250px] bg-[#7355A9] border-none rounded-none h-[50px] flex gap-3 items-center text-white font-monserat text-lg font-semibold">
+                    <span>
+                      <CiMenuBurger className="text-white font-semibold" />
+                    </span>
+                    Bo'limlar
+                  </div>
+                  <div className="flex justify-end items-start md:hidden">
+                    <img
+                      className="w-[50%] mr-3"
+                      src="../../public/img/logo-1.png"
+                      alt=""
+                    />
+                  </div>
                 </div>
+
                 <ul
                   tabIndex={0}
                   className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">

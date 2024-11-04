@@ -20,7 +20,7 @@ function Navbar() {
   };
 
   return (
-    <div className="bg-[#523d7b]">
+    <div className="bg-[#523d7b] hidden md:block">
       <div className="m-auto max-w-[1440px] ">
         <div className="navbar ">
           <div className="navbar-start">
@@ -69,19 +69,19 @@ function Navbar() {
               <span>
                 <FaPhoneAlt className="text-white" />
               </span>
-              <p className="font-monserat text-white font-bold">
+              <p className="font-monserat text-white font-bold text-sm md:text-base">
                 +358468905026
               </p>
             </div>
           </div>
           <div className="navbar-end">
-            <div className="flex justify-between gap-6 items-center">
+            <div className="flex justify-center gap-6 items-center">
               <Link className="btn-ghost">
                 <FaRegUserCircle className="text-white text-2xl" />
               </Link>
               <Link to="/likedproducts" className="btn-ghost relative ">
                 <FaRegHeart className="text-white text-2xl " />
-                <div className="indicator absolute top-0 md:right-[-5px]">
+                <div className="indicator absolute top-0 right-[-4px] md:right-[-5px]">
                   <span className="indicator-item badge bg-[#f1970a] border-[#f1970a]">
                     {likedArray.length}
                   </span>
@@ -114,13 +114,13 @@ function Navbar() {
                 </div>
                 <div
                   tabIndex={0}
-                  className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-[500px] shadow">
+                  className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 md:w-[500px] shadow">
                   <div className="card-body">
-                    <span className="text-lg font-bold">
+                    <span className="md:text-lg font-bold text-xs">
                       {shopCard.length} mahsulot mavjud
                     </span>
                     <div className="overflow-x-auto">
-                      <table className="table table-md w-full">
+                      <table className="table table-md w-full hidden md:block">
                         <tbody>
                           {shopCard.map((shopcard) => (
                             <tr key={shopcard.id} className="hover">
@@ -153,7 +153,7 @@ function Navbar() {
                     <div className="card-actions">
                       <Link
                         to="/shopcard"
-                        className="btn bg-[#f1970a] text-white btn-block">
+                        className="btn bg-[#f1970a] text-white btn-block text-[10px]">
                         Buyurtmani rasmiylashtirish
                       </Link>
                     </div>

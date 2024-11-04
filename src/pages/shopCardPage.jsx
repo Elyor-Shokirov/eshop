@@ -26,7 +26,7 @@ function ShopCardPage() {
         <img
           src="/img/empty_cart-512.webp"
           alt="shop card"
-          className="w-[17rem]"
+          className="md:w-[17rem] w-52"
         />
         <h1 className="text-center font-monserat text-sm md:text-4xl">
           Sizda hozircha hech qanday mahsulot yo'q
@@ -42,7 +42,7 @@ function ShopCardPage() {
 
   return (
     <div>
-      <div className="m-auto max-w-[1440px]">
+      <div className="m-auto max-w-[1440px] p-4 md:p-0">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5 mt-10">
           <div className="col-span-12 md:col-span-8">
             <div className="card bg-base-100 shadow-xl border p-2">

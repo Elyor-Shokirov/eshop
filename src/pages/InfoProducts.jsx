@@ -16,7 +16,7 @@ function InfoProducts() {
   return (
     <div>
       <div className="m-auto max-w-[1440px]">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mt-5">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mt-5 p-6 md:p-0">
           <div className="col-span-1 md:col-span-5">
             <div className=" border rounded ">
               <img src={productinfo.images[0]} alt="Product Image" />

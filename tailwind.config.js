@@ -9,6 +9,9 @@ export default {
       backgroundImage: {
         cardSectionBgImage: "url('./public/img/Placeholder.png')",
       },
+      boxShadow: {
+        bottomNavigateShadow: "0 -4px 8px #0000000f",
+      },
     },
   },
   plugins: [require("daisyui")],

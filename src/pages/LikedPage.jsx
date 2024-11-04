@@ -27,7 +27,9 @@ function LikedPage() {
       <h1 className="ml-[2rem] text-[#f1970a] font-monserat text-2xl justify-center text-center font-bold">
         Sevimli mahsulotlar
       </h1>
-      {likedArray.length > 0 && <ProductContainer products={likedArray} />}
+      <div className="pt-">
+        {likedArray.length > 0 && <ProductContainer products={likedArray} />}
+      </div>
     </div>
   );
 }
