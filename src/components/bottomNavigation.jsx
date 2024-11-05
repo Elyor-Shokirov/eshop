@@ -10,7 +10,7 @@ function BottomNavigation() {
   const { likedArray, shopCard } = useSelector((state) => state.product);
 
   return (
-    <div className="btm-nav z-40">
+    <div className="btm-nav z-40 block md:hidden">
       <div className="bg-[#523d7b] h-[68px] flex items-center shadow-bottomNavigateShadow">
         <ul className="menu menu-horizontal  rounded-box flex justify-between w-full">
           <li>
