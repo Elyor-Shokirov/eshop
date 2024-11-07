@@ -13,7 +13,9 @@ import { deleteProducts } from "../feauturs/productSlice";
 
 function Navbar() {
   const dispatch = useDispatch();
-  const { likedArray, shopCard } = useSelector((state) => state.product);
+  const { likedArray, shopCard, totalAmmount } = useSelector(
+    (state) => state.product
+  );
 
   const deleteProduct = (shopcard) => {
     dispatch(deleteProducts(shopcard.id));
@@ -108,23 +110,22 @@ function Navbar() {
                       />
                     </svg>
                     <span className="badge badge-md indicator-item bg-[#f1970a] border-none">
-                      {shopCard.length}
+                      {totalAmmount}
                     </span>
                   </div>
                 </div>
                 <div
                   tabIndex={0}
-                  className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 md:w-[500px] shadow">
+                  className="card card-compact dropdown-content bg-base-100 z-[999] mt-3 md:w-[500px] shadow">
                   <div className="card-body">
                     <span className="md:text-lg font-bold text-xs">
-                      {shopCard.length} mahsulot mavjud
+                      {totalAmmount} mahsulot mavjud
                     </span>
                     <div className="overflow-x-auto">
                       <table className="table table-md w-full hidden md:block">
                         <tbody>
                           {shopCard.map((shopcard) => (
                             <tr key={shopcard.id} className="hover">
-                              {/* Avatar column */}
                               <th className="w-12">
                                 <div className="avatar">
                                   <div className="w-8 rounded">

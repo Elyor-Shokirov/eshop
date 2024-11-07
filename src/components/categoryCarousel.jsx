@@ -9,7 +9,6 @@ function CategoryCarousel() {
     "https://dummyjson.com/products/categories"
   );
 
-  console.log(data);
   const responsive = {
     desktop: {
       breakpoint: {
@@ -62,8 +61,8 @@ function CategoryCarousel() {
           sliderClass=""
           slidesToSlide={1}
           swipeable>
-          {data.map((item) => (
-            <Link to={`/categoryproducts/${item.slug}`} key={data.slug}>
+          {data.map((item, idx) => (
+            <Link to={`/categoryproducts/${item.slug}`} key={idx}>
               <div>
                 <div className="flex flex-col justify-center items-center">
                   <div className="p-7  ">

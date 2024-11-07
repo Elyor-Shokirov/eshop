@@ -1,10 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteProducts, likedProducts } from "../feauturs/productSlice";
+import {
+  decrementAmount,
+  deleteProducts,
+  incrementAmount,
+  likedProducts,
+} from "../feauturs/productSlice";
 
 function ShopCardPage() {
-  const { shopCard } = useSelector((state) => state.product);
+  const { shopCard, totalPrice } = useSelector((state) => state.product);
 
   const dispatch = useDispatch();
 
@@ -16,9 +21,8 @@ function ShopCardPage() {
     dispatch(likedProducts(shopcard));
   };
 
-  const totalPrice = shopCard.reduce((sum, item) => sum + item.price, 0);
+  // const totalPrice = shopCard.reduce((sum, item) => sum + item.price, 0);
   const totalFixPrice = totalPrice.toFixed(2);
-  console.log(totalFixPrice);
 
   if (shopCard.length == 0) {
     return (
@@ -94,23 +98,32 @@ function ShopCardPage() {
                           </div>
                         </td>
                         <td className="flex justify-end items-end h-full flex-col min-h-[68px] min-w-[150px]">
-                          <div className="relative w-40 h-3 mb-[9px]">
-                            <button className="absolute left-[2px] !min-h-[35px] h-[36px] w-10 top-[2px] rounded-r-none btn btn-square">
+                          <div className="relative w-full h-3 mb-[9px]">
+                            <button
+                              onClick={() =>
+                                dispatch(decrementAmount(shopcard))
+                              }
+                              className="absolute left-[2px] !min-h-[35px] h-[36px] w-10 top-[2px] rounded-r-none btn btn-square">
                               -
                             </button>
                             <input
                               type="text"
                               className="w-full z-[999] h-10 text-center px-12 input input-bordered border-[2px] border-[#111]"
-                              value="1"
+                              value={shopcard.amount}
                             />
-                            <button className="absolute !min-h-[35px] h-[36px] w-10  right-[2px] top-[2px] rounded-l-none btn btn-square">
+                            <button
+                              onClick={() =>
+                                dispatch(incrementAmount(shopcard))
+                              }
+                              className="absolute !min-h-[35px] h-[36px] w-10  right-[2px] top-[2px] rounded-l-none btn btn-square">
                               +
                             </button>
                           </div>
                         </td>
-                        <th>
-                          <div className="flex justify-end items-end">
-                            <p className="font-monserat">{`$ ${shopcard.price}`}</p>
+                        <th className="w-full min-w-14">
+                          <div className="flex justify-end items-end gap-1">
+                            <span>$</span>
+                            <span className="font-monserat ">{` ${shopcard.price}`}</span>
                           </div>
                         </th>
                       </tr>
@@ -152,7 +165,7 @@ function ShopCardPage() {
                   <span className="font-monserat text-sm">To'liq to'lash</span>
                 </div>
                 <hr />
-                <button className="btn font-monserat bg-[#f1970a] text-white text-xl">
+                <button className="btn font-monserat bg-[#f1970a] text-white md:text-xl">
                   Buyurma berish
                 </button>
               </div>

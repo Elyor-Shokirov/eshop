@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 
 function BottomNavigation() {
   const dispatch = useDispatch();
-  const { likedArray, shopCard } = useSelector((state) => state.product);
+  const { likedArray, shopCard, totalAmmount } = useSelector(
+    (state) => state.product
+  );
 
   return (
     <div className="btm-nav z-40 block md:hidden">
@@ -42,7 +44,7 @@ function BottomNavigation() {
                 <HiOutlineShoppingCart className="text-white text-2xl" />
                 <div className="indicator absolute top-0 right-[-4px]">
                   <span className="indicator-item badge bg-[#f1970a] border-[#f1970a]">
-                    {shopCard.length}
+                    {totalAmmount}
                   </span>
                 </div>
               </Link>

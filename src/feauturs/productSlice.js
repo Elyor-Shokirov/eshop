@@ -1,25 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
+import { IoIosWarning } from "react-icons/io";
 
-const loadProducts = () => {
-  try {
-    const products = localStorage.getItem("products");
-    return products ? JSON.parse(products) : [];
-  } catch (error) {
-    console.log(error.message);
-    return [];
-  }
-};
+// const loadProducts = () => {
+//   try {
+//     const products = localStorage.getItem("products");
+//     return products ? JSON.parse(products) : [];
+//   } catch (error) {
+//     console.log(error.message);
+//     return [];
+//   }
+// };
 
-// Liked products'larni yuklash funksiyasi
-const loadLikedProducts = () => {
-  try {
-    const products = localStorage.getItem("likedProducts");
-    return products ? JSON.parse(products) : []; // `likedProducts` o'rniga `products` chaqiriladi
-  } catch (error) {
-    console.log(error.message);
-    return [];
-  }
-};
+// // Liked products'larni yuklash funksiyasi
+// const loadLikedProducts = () => {
+//   try {
+//     const products = localStorage.getItem("likedProducts");
+//     return products ? JSON.parse(products) : [];
+//   } catch (error) {
+//     return [];
+//   }
+// };
 
 export const productSlice = createSlice({
   name: "product",
@@ -27,12 +28,44 @@ export const productSlice = createSlice({
     products: [],
     likedArray: [],
     shopCard: [],
-    totalPrice: 0,
     totalAmmount: 0,
+    totalPrice: 0,
   },
   reducers: {
     addProducts: (state, { payload }) => {
-      state.shopCard = [...state.shopCard, payload];
+      const exist = state.shopCard.find((item) => item.id == payload.id);
+      if (exist) {
+        toast("Bu maxsulot qo'shilgan", {
+          icon: IoIosWarning({ className: "text-yellow-500" }),
+        });
+      } else {
+        state.shopCard = [...state.shopCard, payload];
+        productSlice.caseReducers.calculateTotal(state);
+        toast.success("Maxsulot qo'shildi", {
+          style: {
+            border: "1px solid #4caf50",
+            padding: "16px",
+            background: "#4caf50",
+            color: "#fff",
+            fontFamily: "Montserrat",
+            fontWeight: 300,
+          },
+          iconTheme: {
+            primary: "#fff",
+            secondary: "#4caf50",
+          },
+        });
+      }
+    },
+    incrementAmount: (state, { payload }) => {
+      const item = state.shopCard.find((product) => product.id == payload.id);
+      item.amount += 1;
+      productSlice.caseReducers.calculateTotal(state);
+    },
+    decrementAmount: (state, { payload }) => {
+      const item = state.shopCard.find((product) => product.id == payload.id);
+      item.amount -= 1;
+      productSlice.caseReducers.calculateTotal(state);
     },
     likedProducts: (state, { payload }) => {
       state.likedArray = [...state.likedArray, payload];
@@ -49,6 +82,16 @@ export const productSlice = createSlice({
       state.products = payload;
       localStorage.setItem("products", JSON.stringify(state.products));
     },
+    calculateTotal: (state) => {
+      let allProductCounter = 0;
+      let allProductPrice = 0;
+      state.shopCard.forEach((product) => {
+        allProductPrice += product.amount * product.price;
+        allProductCounter += product.amount;
+      });
+      state.totalAmmount = allProductCounter;
+      state.totalPrice = allProductPrice;
+    },
   },
 });
 
@@ -58,6 +101,8 @@ export const {
   likedProducts,
   unLikeProducts,
   deleteProducts,
+  incrementAmount,
+  decrementAmount,
 } = productSlice.actions;
 
 export default productSlice.reducer;

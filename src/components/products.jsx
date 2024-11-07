@@ -14,7 +14,6 @@ import "./product.css";
 
 function Products({ product, added }) {
   const { id, images, title, price } = product;
-  const [isLoaded, setIsLoaded] = useState(false); // New state for image loading
 
   const dispatch = useDispatch();
 
@@ -47,41 +46,14 @@ function Products({ product, added }) {
     }
   };
 
-  const handleAddProducts = (product) => {
-    const addShopCard = products.find((pro) => pro.id === product.id);
-    if (addShopCard) {
-      const addProductPromise = new Promise((resolve, reject) => {
-        try {
-          dispatch(addProducts(addShopCard));
-          resolve();
-        } catch (error) {
-          reject(error);
-        }
-      });
-      toast.promise(
-        addProductPromise,
-        {
-          loading: "Saving...",
-          success: <b>Mahsulotingiz muvofaqqiyatli qo'shildi</b>,
-          error: <b>Could not save.</b>,
-        },
-        {
-          style: {
-            border: "1px solid #4caf50",
-            padding: "16px",
-            background: "#4caf50",
-            color: "#fff",
-            fontFamily: "Montserrat",
-            fontWeight: 300,
-          },
-          iconTheme: {
-            primary: "#fff",
-            secondary: "#4caf50",
-          },
-        }
-      );
-    }
+  const handleAddProducts = (e) => {
+    // const addShopCard = products.find((pro) => pro.id === product.id);
+    e.preventDefault();
+    console.log("bosildi");
+    dispatch(addProducts({ ...product, amount: 1 }));
   };
+
+  console.log(shopCard);
 
   return (
     <div className="col-span-12 md:col-span-3">
@@ -116,9 +88,7 @@ function Products({ product, added }) {
               </Link>
             </li>
             <li>
-              <Link
-                data-tip="Add to cart"
-                onClick={() => handleAddProducts(product)}>
+              <Link data-tip="Add to cart" onClick={handleAddProducts}>
                 <MdAddShoppingCart />
               </Link>
             </li>
@@ -139,7 +109,7 @@ function Products({ product, added }) {
               <span>USD</span>
             </div>
             <button
-              onClick={() => handleAddProducts(product)}
+              onClick={handleAddProducts}
               className="btn rounded-full btn-ghost">
               <MdAddShoppingCart className="text-xl text-[#f1970a]" />
             </button>

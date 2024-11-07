@@ -23,7 +23,6 @@ function Home() {
       dispatch(changeAnyValue(data.products));
     }
   }, [data]);
-  console.log(products);
 
   return (
     <div>
