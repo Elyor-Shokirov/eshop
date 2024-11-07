@@ -97,8 +97,8 @@ function ShopCardPage() {
                             </div>
                           </div>
                         </td>
-                        <td className="flex justify-end items-end h-full flex-col min-h-[68px] min-w-[150px]">
-                          <div className="relative w-full h-3 mb-[9px]">
+                        <td className="flex justify-end items-end h-full flex-col min-h-[68px] md:min-w-[150px]">
+                          <div className="relative md:w-40 h-3 mb-[9px] w-28">
                             <button
                               onClick={() =>
                                 dispatch(decrementAmount(shopcard))
@@ -120,10 +120,10 @@ function ShopCardPage() {
                             </button>
                           </div>
                         </td>
-                        <th className="w-full min-w-14">
-                          <div className="flex justify-end items-end gap-1">
+                        <th>
+                          <div className="flex justify-end items-end gap-2">
                             <span>$</span>
-                            <span className="font-monserat ">{` ${shopcard.price}`}</span>
+                            <p className="font-monserat">{` ${shopcard.price}`}</p>
                           </div>
                         </th>
                       </tr>
