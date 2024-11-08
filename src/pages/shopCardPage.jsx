@@ -100,17 +100,20 @@ function ShopCardPage() {
                         <td className="flex justify-end items-end h-full flex-col min-h-[68px] md:min-w-[150px]">
                           <div className="relative md:w-40 h-3 mb-[9px] w-28">
                             <button
-                              onClick={() =>
-                                dispatch(decrementAmount(shopcard))
-                              }
+                              onClick={() => {
+                                if (shopcard.amount == 1) {
+                                  dispatch(deleteProduct(shopcard));
+                                } else {
+                                  dispatch(decrementAmount(shopcard));
+                                }
+                              }}
                               className="absolute left-[2px] !min-h-[35px] h-[36px] w-10 top-[2px] rounded-r-none btn btn-square">
                               -
                             </button>
-                            <input
-                              type="text"
-                              className="w-full z-[999] h-10 text-center px-12 input input-bordered border-[2px] border-[#111]"
-                              value={shopcard.amount}
-                            />
+                            <p className="w-full z-[999] h-10 text-center px-12 input input-bordered border-[2px] items-center flex justify-center border-[#111]">
+                              {shopcard.amount}
+                            </p>
+                            {/* <input type="text" value={shopcard.amount} /> */}
                             <button
                               onClick={() =>
                                 dispatch(incrementAmount(shopcard))

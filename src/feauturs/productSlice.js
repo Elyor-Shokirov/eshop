@@ -2,26 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import { IoIosWarning } from "react-icons/io";
 
-// const loadProducts = () => {
-//   try {
-//     const products = localStorage.getItem("products");
-//     return products ? JSON.parse(products) : [];
-//   } catch (error) {
-//     console.log(error.message);
-//     return [];
-//   }
-// };
-
-// // Liked products'larni yuklash funksiyasi
-// const loadLikedProducts = () => {
-//   try {
-//     const products = localStorage.getItem("likedProducts");
-//     return products ? JSON.parse(products) : [];
-//   } catch (error) {
-//     return [];
-//   }
-// };
-
 export const productSlice = createSlice({
   name: "product",
   initialState: {
@@ -77,6 +57,7 @@ export const productSlice = createSlice({
     },
     deleteProducts: (state, { payload }) => {
       state.shopCard = state.shopCard.filter((delPro) => delPro.id !== payload);
+      productSlice.caseReducers.calculateTotal(state);
     },
     changeAnyValue: (state, { payload }) => {
       state.products = payload;
@@ -91,6 +72,7 @@ export const productSlice = createSlice({
       });
       state.totalAmmount = allProductCounter;
       state.totalPrice = allProductPrice;
+      localStorage.setItem("products", JSON.stringify(state));
     },
   },
 });

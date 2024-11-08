@@ -47,13 +47,9 @@ function Products({ product, added }) {
   };
 
   const handleAddProducts = (e) => {
-    // const addShopCard = products.find((pro) => pro.id === product.id);
     e.preventDefault();
-    console.log("bosildi");
     dispatch(addProducts({ ...product, amount: 1 }));
   };
-
-  console.log(shopCard);
 
   return (
     <div className="col-span-12 md:col-span-3">
