@@ -38,7 +38,7 @@ function CategoryCarousel() {
           autoPlay={true}
           arrows={true}
           autoPlaySpeed={2000}
-          centerMode={true}
+          // centerMode={true}
           className=""
           // containerClass="container"
           dotListClass=""

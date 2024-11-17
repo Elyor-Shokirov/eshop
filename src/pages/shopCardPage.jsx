@@ -16,7 +16,6 @@ function ShopCardPage() {
   const deleteProduct = (shopcard) => {
     dispatch(deleteProducts(shopcard.id));
   };
-
   const addLikedPrododucts = (shopcard) => {
     dispatch(likedProducts(shopcard));
   };

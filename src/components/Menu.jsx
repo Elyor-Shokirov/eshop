@@ -1,7 +1,13 @@
 import React from "react";
 import { CiMenuBurger } from "react-icons/ci";
+import { Link } from "react-router-dom";
+import { useFetch } from "../hooks/useFetch";
 
 function Menu() {
+  const { data, isPending, error } = useFetch(
+    "https://dummyjson.com/products/categories"
+  );
+
   return (
     <div className="bg-[#5f4b84] ">
       <div className="m-auto max-w-[1440px]">
@@ -30,16 +36,17 @@ function Menu() {
 
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                  <li>
-                    <p>Computerlar</p>
-                  </li>
-                  <li>
-                    <p>Televizorlar</p>
-                  </li>
-                  <li>
-                    <p>Noutbooklar</p>
-                  </li>
+                  className="dropdown-content menu bg-base-100 rounded-box z-[999] w-52 p-2 shadow">
+                  {data &&
+                    data.map((category, idx) => (
+                      <Link to={`/categoryproducts/${category.slug}`} key={idx}>
+                        <li>
+                          <p className="font-monserat font-medium">
+                            {category.name}
+                          </p>
+                        </li>
+                      </Link>
+                    ))}
                 </ul>
               </div>
             </a>
